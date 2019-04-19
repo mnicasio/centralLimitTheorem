@@ -1,12 +1,20 @@
 import pandas as pd 
 import csv
 
-z_table = pd.read_csv("z_table.csv")
+df = pd.read_csv("/Users/mnicasio/Desktop/Data/CentralLimitTheorem/z_table_clt.csv")
 
-print(z_table.head(5))
-
-def probValueLess (mean, value, std, n):
+def probVal (mean, value, std, n):
+    """[This function calculates the probability that a value will be either greater than or less than the mean]
+    
+    Arguments:
+        mean {[int]} -- [the mean of the distribution]
+        value {[int]} -- [the value of interest]
+        std {[int]} -- [the standard deviation of the distribution]
+        n {[int]} -- [the sample size]
+    """
     z_value = (value-mean) / (std/(n**0.5))
-    return z_value 
+    z = str(z_value)
+    prob = round(float(df.loc[:, z] * 100), 2)
+    print('The probability is ' +str(prob)+ " %")
 
-print(probValueLess(110, 120, 20, 25))
+probVal(110, 120, 20, 25)
